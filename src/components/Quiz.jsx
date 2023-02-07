@@ -25,10 +25,11 @@ export default function Quiz() {
     }
 
     function printQuestions() {
-        return quizzes.map((quiz) => {
+        return quizzes.map((quiz, index) => {
             return (
                 <Question
                     key={nanoid()}
+                    index={index + 1}
                     question={quiz.question}
                     choices={quiz.choices}
                 />
@@ -44,10 +45,12 @@ export default function Quiz() {
     );
 }
 
-function Question({ question, choices }) {
+function Question({ question, choices, index }) {
     return (
         <section>
-            <h1 className='quiz-question'>{question}</h1>
+            <h1 className='quiz-question'>
+                Question {index}: {question}
+            </h1>
             <div className='quiz-choices'>
                 <button className='quiz-choice-1'>{choices[0].choice}</button>
                 <button className='quiz-choice-1'>{choices[1].choice}</button>
