@@ -1,6 +1,9 @@
+import { useState } from "react";
 import data from "../assets/questions.js";
 
 export default function Quiz() {
+    const [quizzes, setQuizzes] = useState(getQuestions());
+
     function getQuestions() {
         return data.map(({ question, correct_answer, incorrect_answers }) => {
             return {
