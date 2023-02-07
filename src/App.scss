@@ -136,3 +136,9 @@ button:focus-visible {
         width: clamp(18rem, 60%, 40rem);
     }
 }
+
+.quiz {
+    @include center-grid-items;
+    width: 100%;
+    padding-top: 2rem;
+}
