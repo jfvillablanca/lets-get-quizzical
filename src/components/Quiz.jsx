@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import { decode } from "he";
 import data from "../assets/questions.js";
 
 export default function Quiz() {
@@ -8,14 +9,14 @@ export default function Quiz() {
     function getQuestions() {
         return data.map(({ question, correct_answer, incorrect_answers }) => {
             return {
-                question,
+                question: decode(question),
                 choices: [
                     {
-                        choice: correct_answer,
+                        choice: decode(correct_answer),
                         isCorrect: true,
                     },
                     ...incorrect_answers.map((answer) => ({
-                        choice: answer,
+                        choice: decode(answer),
                         isCorrect: false,
                     })),
                 ],
