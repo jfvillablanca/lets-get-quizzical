@@ -40,6 +40,7 @@ export default function Quiz() {
     return (
         <div className='quiz'>
             {printQuestions()}
+            <SubmitButton />
         </div>
     );
 }
@@ -58,4 +59,8 @@ function Question({ question, choices, index }) {
             </div>
         </section>
     );
+}
+
+function SubmitButton() {
+    return <button className='check-answers'>Check Answers</button>;
 }
