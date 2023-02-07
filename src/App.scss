@@ -141,4 +141,22 @@ button:focus-visible {
     @include center-grid-items;
     width: 100%;
     padding-top: 2rem;
+
+    section{
+        width: 90%;
+        display: grid;
+        gap: 2rem;
+        grid-template-rows: 1fr min-content;
+        justify-items: center;
+        margin-bottom: 2rem;
+    }
+
+    section::after {
+      content: "";
+      display: block;
+      width: 100%;
+      border-top: 1px solid #5f686d;
+      margin-top: 10px;
+    }
+
 }
