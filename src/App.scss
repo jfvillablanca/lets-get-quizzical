@@ -95,6 +95,16 @@ button:focus-visible {
         background-color: white;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     }
+    .quiz-choices {
+        button {
+            border: 1px solid #293264;
+        }
+
+        button.selected {
+            background-color: #D6DBF5;
+        }
+
+    }
 }
 
 .App.dark {
@@ -107,6 +117,17 @@ button:focus-visible {
     }
     button:hover {
         border-color: #646cff;
+    }
+
+    .quiz-choices {
+        button {
+            border: 1px solid #D6DBF5;
+        }
+
+        button.selected {
+            background-color: #293264;
+        }
+
     }
 }
 
@@ -180,6 +201,10 @@ button:focus-visible {
         button {
             font-size: 1.6rem;
             padding: 0.3rem;
+        }
+
+        button.selected {
+            border: none;
         }
     }
 }
