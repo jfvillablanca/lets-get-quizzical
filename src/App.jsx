@@ -9,7 +9,6 @@ function App() {
     const [theme, setTheme] = useState("dark");
 
     function toggleTheme() {
-        console.log(theme);
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
     }
 
