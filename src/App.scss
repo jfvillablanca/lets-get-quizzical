@@ -32,6 +32,24 @@ body {
     min-width: 100vw;
 }
 
+.react-toggle-track > * {
+    margin: 0;
+    height: 100%;
+    @include center-grid-items;
+}
+
+.react-toggle--checked .react-toggle-track {
+  background-color: #D3D7D9;
+}
+
+.react-toggle--checked .react-toggle-thumb {
+  border-color: #5F686D;
+}
+
+.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: #BEC3C6;
+}
+
 .App.light {
     color: #213547;
     background-color: #f9f9f9;

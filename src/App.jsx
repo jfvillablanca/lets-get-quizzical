@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./App.scss";
 import Toggle from "react-toggle";
 import "./assets/react-toggle.css";
 import { Icon } from "@iconify/react";
 import Intro from "./components/Intro.jsx";
+import "./App.scss";
 
 function App() {
     const [theme, setTheme] = useState("dark");
@@ -17,7 +17,6 @@ function App() {
         <div className={`App ${theme}`}>
             <Toggle
                 onClick={toggleTheme}
-                className='theme-toggle'
                 icons={{
                     checked: (
                         <Icon icon='material-symbols:light-mode-outline' />
