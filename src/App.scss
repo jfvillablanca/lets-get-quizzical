@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,600&display=swap");
 
 @mixin center-grid-items {
     display: grid;
@@ -164,7 +164,7 @@ button:focus-visible {
     width: 100%;
     padding-top: 2rem;
 
-    section{
+    section {
         width: 90%;
         display: grid;
         gap: 2rem;
@@ -174,11 +174,11 @@ button:focus-visible {
     }
 
     section::after {
-      content: "";
-      display: block;
-      width: 100%;
-      border-top: 1px solid #5f686d;
-      margin-top: 10px;
+        content: "";
+        display: block;
+        width: 100%;
+        border-top: 1px solid #5f686d;
+        margin-top: 10px;
     }
 
     .quiz-question {
