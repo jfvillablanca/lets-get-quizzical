@@ -30,24 +30,35 @@ body {
     min-height: 100vh;
     width: 100%;
     min-width: 100vw;
+    display: grid;
+    grid-template-rows: 4rem 1fr;
+    gap: 1rem;
 }
 
-.react-toggle-track > * {
-    margin: 0;
-    height: 100%;
-    @include center-grid-items;
+.react-toggle,
+.react-toggle--checked {
+    justify-self: end;
+    margin-right: 2rem;
+    margin-top: 1rem;
+    display: grid;
+    align-items: center;
 }
 
 .react-toggle--checked .react-toggle-track {
-  background-color: #D3D7D9;
+    background-color: #d3d7d9;
 }
 
 .react-toggle--checked .react-toggle-thumb {
-  border-color: #5F686D;
+    border-color: #5f686d;
 }
 
 .react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
-  background-color: #BEC3C6;
+    background-color: #bec3c6;
+}
+
+.react-toggle-track > * {
+    height: 100%;
+    @include center-grid-items;
 }
 
 .App.light {
