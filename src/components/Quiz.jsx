@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { nanoid } from "nanoid";
 import data from "../assets/questions.js";
 
 export default function Quiz() {
@@ -22,9 +23,22 @@ export default function Quiz() {
         });
     }
 
+    function printQuestions() {
+        return quizzes.map((quiz) => {
+            return (
+                <Question
+                    key={nanoid()}
+                    question={quiz.question}
+                    choices={quiz.choices}
+                />
+            );
+        });
+    }
+
     return (
         <div className='quiz'>
             <Question />
+            {printQuestions()}
         </div>
     );
 }
