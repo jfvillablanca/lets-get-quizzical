@@ -9,6 +9,7 @@ export default function Quiz() {
     function getQuestions() {
         return data.map(({ question, correct_answer, incorrect_answers }) => {
             return {
+                id: nanoid(),
                 question: decode(question),
                 choices: [
                     {
@@ -28,7 +29,8 @@ export default function Quiz() {
         return quizzes.map((quiz, index) => {
             return (
                 <Question
-                    key={nanoid()}
+                    key={quiz.id}
+                    id={quiz.id}
                     index={index + 1}
                     question={quiz.question}
                     choices={quiz.choices}
