@@ -164,4 +164,17 @@ button:focus-visible {
         max-width: 100%;
     }
 
+    .quiz-choices {
+        width: 100%;
+        display: grid;
+
+        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+
+        button {
+            font-size: 1.6rem;
+            padding: 0.3rem;
+        }
+    }
 }
