@@ -39,7 +39,6 @@ export default function Quiz() {
 
     return (
         <div className='quiz'>
-            <Question />
             {printQuestions()}
         </div>
     );
@@ -53,11 +52,10 @@ function Question({ question, choices, index }) {
             </h1>
             <div className='quiz-choices'>
                 <button className='quiz-choice-1'>{choices[0].choice}</button>
-                <button className='quiz-choice-1'>{choices[1].choice}</button>
-                <button className='quiz-choice-1'>{choices[2].choice}</button>
-                <button className='quiz-choice-1'>{choices[3].choice}</button>
+                <button className='quiz-choice-2'>{choices[1].choice}</button>
+                <button className='quiz-choice-3'>{choices[2].choice}</button>
+                <button className='quiz-choice-4'>{choices[3].choice}</button>
             </div>
-            <hr />
         </section>
     );
 }
