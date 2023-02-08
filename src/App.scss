@@ -214,4 +214,10 @@ button:focus-visible {
 
 .check-answers {
     font-weight: bold;
+    width: max-content;
+    min-height: 5rem;
+
+    p {
+        font-size: 0.8rem;
+    }
 }
