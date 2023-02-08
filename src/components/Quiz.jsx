@@ -69,12 +69,21 @@ export default function Quiz() {
         setQuizIsFinished(true);
     }
 
+    function playAgain() {
+        setSelectedAnswers({});
+        setAnsweredAll(false);
+        setQuizIsFinished(false);
+    }
+
     return (
         <div className='quiz'>
             {printQuestions()}
             <SubmitButton
                 isAnsweredCompletely={answeredAll}
-                handleClick={() => checkAnswers()}
+                handleClick={() =>
+                    quizIsFinished ? playAgain() : checkAnswers()
+                }
+                quizIsFinished={quizIsFinished}
             />
         </div>
     );
