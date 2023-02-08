@@ -10,6 +10,7 @@ function shuffleArray(array) {
 export default function Quiz() {
     const [quizzes, setQuizzes] = useState(getQuestions());
     const [selectedAnswers, setSelectedAnswers] = useState({});
+    const [answeredAll, setAnsweredAll] = useState(false);
 
     function handleSelect(questionIndex, answerIndex) {
         console.log(questionIndex, answerIndex);
@@ -54,6 +55,12 @@ export default function Quiz() {
                 />
             );
         });
+    }
+
+    function checkIfAllAnswered() {
+        setAnsweredAll(
+            () => Object.keys(selectedAnswers).length === quizzes.length
+        );
     }
 
     return (
