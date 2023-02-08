@@ -11,6 +11,7 @@ export default function Quiz() {
     const [quizzes, setQuizzes] = useState(getQuestions());
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
+    const [quizIsFinished, setQuizIsFinished] = useState(false);
 
     function handleSelect(id, choice) {
         setSelectedAnswers({
@@ -54,6 +55,7 @@ export default function Quiz() {
                     questionNum={index + 1}
                     question={quiz.question}
                     choices={quiz.choices}
+                    quizIsFinished={quizIsFinished}
                     selectedAnswer={selectedAnswers[quiz.id]}
                     handleSelect={(answerIndex) =>
                         handleSelect(quiz.id, quiz.choices[answerIndex])
@@ -61,6 +63,10 @@ export default function Quiz() {
                 />
             );
         });
+    }
+
+    function checkAnswers() {
+        setQuizIsFinished(true);
     }
 
     return (
@@ -75,10 +81,11 @@ export default function Quiz() {
 }
 
 function Question({
-    question,
-    choices,
     id,
     questionNum,
+    question,
+    choices,
+    quizIsFinished,
     selectedAnswer,
     handleSelect,
 }) {
@@ -113,7 +120,7 @@ function Question({
                 Question {questionNum}: {question}
             </h1>
             <div className='quiz-choices'>
-                {printQuizChoice()}
+                {printQuizChoice(quizIsFinished)}
             </div>
         </section>
     );
