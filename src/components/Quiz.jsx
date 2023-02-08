@@ -13,7 +13,6 @@ export default function Quiz() {
     const [answeredAll, setAnsweredAll] = useState(false);
 
     function handleSelect(questionIndex, answerIndex) {
-        console.log(questionIndex, answerIndex);
         setSelectedAnswers({
             ...selectedAnswers,
             [questionIndex]: answerIndex,
