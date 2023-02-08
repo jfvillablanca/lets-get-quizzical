@@ -22,7 +22,7 @@ export default function Quiz() {
             // selectedAnswers gets updated on the next render,
             // the length update would happen in the future,
             // not now when it's needed lol. Thus: "+1"
-            () => Object.keys(selectedAnswers).length + 1 === quizzes.length
+            () => Object.keys(selectedAnswers).length + 1 >= quizzes.length
         );
     }
 
