@@ -3,6 +3,10 @@ import { nanoid } from "nanoid";
 import { decode } from "he";
 import data from "../assets/questions.js";
 
+function shuffleArray(array) {
+    return array.slice().sort(() => Math.random() - 0.5);
+}
+
 export default function Quiz() {
     const [quizzes, setQuizzes] = useState(getQuestions());
 
