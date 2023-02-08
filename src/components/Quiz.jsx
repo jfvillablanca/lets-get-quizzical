@@ -18,6 +18,13 @@ export default function Quiz() {
             ...selectedAnswers,
             [questionIndex]: answerIndex,
         });
+        setAnsweredAll(
+            // HACK: +1 is caused by an off-by-one bug. Since
+            // selectedAnswers gets updated on the next render,
+            // the length update would happen in the future,
+            // not now when it's needed lol. Thus: "+1"
+            () => Object.keys(selectedAnswers).length + 1 === quizzes.length
+        );
     }
 
     function getQuestions() {
@@ -55,12 +62,6 @@ export default function Quiz() {
                 />
             );
         });
-    }
-
-    function checkIfAllAnswered() {
-        setAnsweredAll(
-            () => Object.keys(selectedAnswers).length === quizzes.length
-        );
     }
 
     return (
