@@ -50,24 +50,29 @@ export default function Quiz() {
 function Question({ question, choices, id, index }) {
     const [selected, setSelected] = useState(null);
 
+    function printQuizChoice() {
+        return choices.map((option, i) => {
+            const classSelect =
+                (selected === i ? "selected " : "") + `quiz-choice-${i}`;
+            return (
+                <button
+                    className={classSelect}
+                    id={`${i}-${id}`}
+                    key={`${i}-${id}`}
+                >
+                    {option.choice}
+                </button>
+            );
+        });
+    }
+
     return (
         <section>
             <h1 className='quiz-question'>
                 Question {index}: {question}
             </h1>
             <div className='quiz-choices'>
-                <button className='quiz-choice-1' id={`1-${id}`}>
-                    {choices[0].choice}
-                </button>
-                <button className='quiz-choice-2' id={`2-${id}`}>
-                    {choices[1].choice}
-                </button>
-                <button className='quiz-choice-3' id={`3-${id}`}>
-                    {choices[2].choice}
-                </button>
-                <button className='quiz-choice-4' id={`4-${id}`}>
-                    {choices[3].choice}
-                </button>
+                {printQuizChoice()}
             </div>
         </section>
     );
