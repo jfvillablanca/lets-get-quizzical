@@ -104,6 +104,22 @@ button:focus-visible {
         button.selected {
             background-color: #a4afe8;
         }
+
+        button.finished {
+            color: #a1a9cc;
+            border: 1px solid #a1a9cc;
+        }
+
+        button.selected.finished.correct {
+            background-color: #94d7a2;
+            color: #293264;
+            border: none;
+        }
+
+        button.selected.finished.wrong {
+            background-color: #f7d9db;
+            border: none;
+        }
     }
 }
 
@@ -126,6 +142,23 @@ button:focus-visible {
 
         button.selected {
             background-color: #7c87c9;
+        }
+
+        button.finished {
+            color: #7581b4;
+            border: 1px solid #7581b4;
+        }
+
+        button.selected.finished.correct {
+            background-color: #3da453;
+            color: white;
+            border: none;
+        }
+
+        button.selected.finished.wrong {
+            background-color: #e8959b;
+            color: white;
+            border: none;
         }
 
         button:hover {
