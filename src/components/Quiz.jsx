@@ -47,17 +47,25 @@ export default function Quiz() {
     );
 }
 
-function Question({ question, choices, index }) {
+function Question({ question, choices, id, index }) {
     return (
         <section>
             <h1 className='quiz-question'>
                 Question {index}: {question}
             </h1>
             <div className='quiz-choices'>
-                <button className='quiz-choice-1'>{choices[0].choice}</button>
-                <button className='quiz-choice-2'>{choices[1].choice}</button>
-                <button className='quiz-choice-3'>{choices[2].choice}</button>
-                <button className='quiz-choice-4'>{choices[3].choice}</button>
+                <button className='quiz-choice-1' id={`1-${id}`}>
+                    {choices[0].choice}
+                </button>
+                <button className='quiz-choice-2' id={`2-${id}`}>
+                    {choices[1].choice}
+                </button>
+                <button className='quiz-choice-3' id={`3-${id}`}>
+                    {choices[2].choice}
+                </button>
+                <button className='quiz-choice-4' id={`4-${id}`}>
+                    {choices[3].choice}
+                </button>
             </div>
         </section>
     );
