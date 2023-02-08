@@ -12,10 +12,10 @@ export default function Quiz() {
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
 
-    function handleSelect(id, answerIndex) {
+    function handleSelect(id, choice) {
         setSelectedAnswers({
             ...selectedAnswers,
-            [id]: answerIndex,
+            [id]: choice,
         });
         setAnsweredAll(
             // HACK: +1 is caused by an off-by-one bug. Since
@@ -56,7 +56,7 @@ export default function Quiz() {
                     choices={quiz.choices}
                     selectedAnswer={selectedAnswers[quiz.id]}
                     handleSelect={(answerIndex) =>
-                        handleSelect(quiz.id, answerIndex)
+                        handleSelect(quiz.id, quiz.choices[answerIndex])
                     }
                 />
             );
@@ -66,7 +66,10 @@ export default function Quiz() {
     return (
         <div className='quiz'>
             {printQuestions()}
-            <SubmitButton isAnsweredCompletely={answeredAll} />
+            <SubmitButton
+                isAnsweredCompletely={answeredAll}
+                handleClick={() => checkAnswers()}
+            />
         </div>
     );
 }
@@ -82,7 +85,7 @@ function Question({
     function printQuizChoice(quizIsFinished) {
         return choices.map((option, i) => {
             const classSelect =
-                (selectedAnswer === i ? "selected " : "") +
+                (selectedAnswer === option ? "selected " : "") +
                 (quizIsFinished ? "finished " : "") +
                 (quizIsFinished && option.isCorrect
                     ? "correct "
@@ -116,7 +119,7 @@ function Question({
     );
 }
 
-function SubmitButton({ isAnsweredCompletely }) {
+function SubmitButton({ isAnsweredCompletely, handleClick }) {
     const [buttonClicked, setButtonClicked] = useState(false);
 
     return (
@@ -124,6 +127,7 @@ function SubmitButton({ isAnsweredCompletely }) {
             className='check-answers'
             onClick={() => {
                 setButtonClicked(true);
+                isAnsweredCompletely && handleClick();
             }}
         >
             Check Answers
