@@ -135,21 +135,30 @@ function Question({
     );
 }
 
-function SubmitButton({ isAnsweredCompletely, handleClick }) {
+function SubmitButton({ isAnsweredCompletely, handleClick, quizIsFinished }) {
     const [buttonClicked, setButtonClicked] = useState(false);
 
     return (
-        <button
-            className='check-answers'
-            onClick={() => {
-                setButtonClicked(true);
-                isAnsweredCompletely && handleClick();
-            }}
+        <div
+            className={
+                "submit-container" + (!quizIsFinished ? " finished" : "")
+            }
         >
-            Check Answers
-            {buttonClicked && !isAnsweredCompletely && (
-                <p>Pls answer all questions uwu</p>
+            {quizIsFinished && (
+                <p className='quiz-results'>3/5 correct answers</p>
             )}
-        </button>
+            <button
+                className='check-answers'
+                onClick={() => {
+                    setButtonClicked(true);
+                    isAnsweredCompletely && handleClick();
+                }}
+            >
+                {quizIsFinished ? "Play again?" : "Check Answers"}
+                {buttonClicked && !isAnsweredCompletely && (
+                    <p>Pls answer all questions uwu</p>
+                )}
+            </button>
+        </div>
     );
 }
