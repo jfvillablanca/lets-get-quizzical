@@ -79,10 +79,18 @@ function Question({
     selectedAnswer,
     handleSelect,
 }) {
-    function printQuizChoice() {
+    function printQuizChoice(quizIsFinished) {
         return choices.map((option, i) => {
             const classSelect =
-                (selectedAnswer === i ? "selected " : "") + `quiz-choice-${i}`;
+                (selectedAnswer === i ? "selected " : "") +
+                (quizIsFinished ? "finished " : "") +
+                (quizIsFinished && option.isCorrect
+                    ? "correct "
+                    : quizIsFinished && !option.isCorrect
+                    ? "wrong "
+                    : "") +
+                `quiz-choice-${i}`;
+
             return (
                 <button
                     className={classSelect}
