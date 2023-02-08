@@ -47,6 +47,10 @@ export default function Quiz() {
                     questionNum={index + 1}
                     question={quiz.question}
                     choices={quiz.choices}
+                    selectedAnswer={selectedAnswers[index]}
+                    handleSelect={(answerIndex) =>
+                        handleSelect(index, answerIndex)
+                    }
                 />
             );
         });
@@ -60,11 +64,18 @@ export default function Quiz() {
     );
 }
 
-function Question({ question, choices, id, questionNum }) {
+function Question({
+    question,
+    choices,
+    id,
+    questionNum,
+    selectedAnswer,
+    handleSelect,
+}) {
     function printQuizChoice() {
         return choices.map((option, i) => {
             const classSelect =
-                (selected === i ? "selected " : "") + `quiz-choice-${i}`;
+                (selectedAnswer === i ? "selected " : "") + `quiz-choice-${i}`;
             return (
                 <button
                     className={classSelect}
