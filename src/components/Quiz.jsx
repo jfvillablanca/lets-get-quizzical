@@ -9,6 +9,15 @@ function shuffleArray(array) {
 
 export default function Quiz() {
     const [quizzes, setQuizzes] = useState(getQuestions());
+    const [selectedAnswers, setSelectedAnswers] = useState({});
+
+    function handleSelect(questionIndex, answerIndex) {
+        console.log(questionIndex, answerIndex);
+        setSelectedAnswers({
+            ...selectedAnswers,
+            [questionIndex]: answerIndex,
+        });
+    }
 
     function getQuestions() {
         return data.map(({ question, correct_answer, incorrect_answers }) => {
@@ -52,12 +61,6 @@ export default function Quiz() {
 }
 
 function Question({ question, choices, id, questionNum }) {
-    const [selected, setSelected] = useState(null);
-
-    function handleSelect(index) {
-        setSelected(index);
-    }
-
     function printQuizChoice() {
         return choices.map((option, i) => {
             const classSelect =
