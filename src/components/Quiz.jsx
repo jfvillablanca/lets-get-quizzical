@@ -48,6 +48,8 @@ export default function Quiz() {
 }
 
 function Question({ question, choices, id, index }) {
+    const [selected, setSelected] = useState(null);
+
     return (
         <section>
             <h1 className='quiz-question'>
