@@ -35,7 +35,7 @@ export default function Quiz() {
                 <Question
                     key={quiz.id}
                     id={quiz.id}
-                    index={index + 1}
+                    questionNum={index + 1}
                     question={quiz.question}
                     choices={quiz.choices}
                 />
@@ -51,7 +51,7 @@ export default function Quiz() {
     );
 }
 
-function Question({ question, choices, id, index }) {
+function Question({ question, choices, id, questionNum }) {
     const [selected, setSelected] = useState(null);
 
     function handleSelect(index) {
@@ -78,7 +78,7 @@ function Question({ question, choices, id, index }) {
     return (
         <section>
             <h1 className='quiz-question'>
-                Question {index}: {question}
+                Question {questionNum}: {question}
             </h1>
             <div className='quiz-choices'>
                 {printQuizChoice()}
