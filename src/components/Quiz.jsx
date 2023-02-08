@@ -12,10 +12,10 @@ export default function Quiz() {
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
 
-    function handleSelect(questionIndex, answerIndex) {
+    function handleSelect(id, answerIndex) {
         setSelectedAnswers({
             ...selectedAnswers,
-            [questionIndex]: answerIndex,
+            [id]: answerIndex,
         });
         setAnsweredAll(
             // HACK: +1 is caused by an off-by-one bug. Since
@@ -54,9 +54,9 @@ export default function Quiz() {
                     questionNum={index + 1}
                     question={quiz.question}
                     choices={quiz.choices}
-                    selectedAnswer={selectedAnswers[index]}
+                    selectedAnswer={selectedAnswers[quiz.id]}
                     handleSelect={(answerIndex) =>
-                        handleSelect(index, answerIndex)
+                        handleSelect(quiz.id, answerIndex)
                     }
                 />
             );
