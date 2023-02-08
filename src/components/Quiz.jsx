@@ -66,7 +66,7 @@ export default function Quiz() {
     return (
         <div className='quiz'>
             {printQuestions()}
-            <SubmitButton />
+            <SubmitButton isAnsweredCompletely={answeredAll} />
         </div>
     );
 }
@@ -108,6 +108,20 @@ function Question({
     );
 }
 
-function SubmitButton() {
-    return <button className='check-answers'>Check Answers</button>;
+function SubmitButton({ isAnsweredCompletely }) {
+    const [buttonClicked, setButtonClicked] = useState(false);
+
+    return (
+        <button
+            className='check-answers'
+            onClick={() => {
+                setButtonClicked(true);
+            }}
+        >
+            Check Answers
+            {buttonClicked && !isAnsweredCompletely && (
+                <p>Pls answer all questions uwu</p>
+            )}
+        </button>
+    );
 }
