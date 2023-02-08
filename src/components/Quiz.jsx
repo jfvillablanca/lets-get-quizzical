@@ -50,6 +50,10 @@ export default function Quiz() {
 function Question({ question, choices, id, index }) {
     const [selected, setSelected] = useState(null);
 
+    function handleSelect(index) {
+        setSelected(index);
+    }
+
     function printQuizChoice() {
         return choices.map((option, i) => {
             const classSelect =
@@ -59,6 +63,7 @@ function Question({ question, choices, id, index }) {
                     className={classSelect}
                     id={`${i}-${id}`}
                     key={`${i}-${id}`}
+                    onClick={() => handleSelect(i)}
                 >
                     {option.choice}
                 </button>
