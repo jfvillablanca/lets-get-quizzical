@@ -117,6 +117,7 @@ function Question({
                     id={`${i}-${id}`}
                     key={`${i}-${id}`}
                     onClick={() => handleSelect(i)}
+                    disabled={quizIsFinished}
                 >
                     {option.choice}
                 </button>

@@ -258,6 +258,10 @@ button:focus-visible {
         button.selected {
             border: none;
         }
+
+        button.finished {
+            cursor: not-allowed;
+        }
     }
 
     .quiz-question,
