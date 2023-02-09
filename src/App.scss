@@ -233,6 +233,7 @@ button:focus-visible {
     }
 
     .quiz-question {
+        justify-self: start;
         font-size: 1.6rem;
         max-width: 100%;
     }
