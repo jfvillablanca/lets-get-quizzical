@@ -214,6 +214,10 @@ button:focus-visible {
     }
 }
 
+.loading-screen {
+    font-size: 3rem;
+}
+
 .quiz {
     @include center-grid-items;
     width: 100%;
