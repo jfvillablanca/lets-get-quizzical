@@ -150,7 +150,12 @@ function SubmitButton({ isAnsweredCompletely, handleClick, quizIsFinished }) {
             <button
                 className='check-answers'
                 onClick={() => {
-                    setButtonClicked(true);
+                    setButtonClicked((prevButtonClicked) => {
+                        if (quizIsFinished) {
+                            return false;
+                        }
+                        return !prevButtonClicked;
+                    });
                     isAnsweredCompletely && handleClick();
                 }}
             >
