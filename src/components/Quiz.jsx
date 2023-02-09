@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "he";
 import data from "../assets/questions.js";
@@ -19,20 +19,6 @@ export default function Quiz() {
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
     const [quizIsFinished, setQuizIsFinished] = useState(false);
-
-    function handleSelect(id, choice) {
-        setSelectedAnswers({
-            ...selectedAnswers,
-            [id]: choice,
-        });
-        setAnsweredAll(
-            // HACK: +1 is caused by an off-by-one bug. Since
-            // selectedAnswers gets updated on the next render,
-            // the length update would happen in the future,
-            // not now when it's needed lol. Thus: "+1"
-            () => Object.keys(selectedAnswers).length + 1 >= quizzes.length
-        );
-    }
 
     useEffect(() => {
         (async (triviaUrl) => {
@@ -68,6 +54,20 @@ export default function Quiz() {
             })();
         })(triviaUrl);
     }, []);
+
+    function handleSelect(id, choice) {
+        setSelectedAnswers({
+            ...selectedAnswers,
+            [id]: choice,
+        });
+        setAnsweredAll(
+            // HACK: +1 is caused by an off-by-one bug. Since
+            // selectedAnswers gets updated on the next render,
+            // the length update would happen in the future,
+            // not now when it's needed lol. Thus: "+1"
+            () => Object.keys(selectedAnswers).length + 1 >= quizzes.length
+        );
+    }
 
     function printQuestions() {
         return quizzes.map((quiz, index) => {
@@ -180,7 +180,9 @@ function SubmitButton({
             }
         >
             {quizIsFinished && (
-                <p className='quiz-results'>{`${correctCount}/${totalCount} correct answers`}</p>
+                <p className='quiz-results'>
+                    {`${correctCount}/${totalCount} correct answers`}
+                </p>
             )}
             <button
                 className='check-answers'
