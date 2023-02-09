@@ -12,6 +12,11 @@ function App() {
 
     const [theme, setTheme] = useState("dark");
     const [quizIsFinished, setQuizIsFinished] = useState(false);
+    const [startQuiz, setStartQuiz] = useState(false);
+
+    function handleIntroClick() {
+        setStartQuiz(true);
+    }
 
     function resetQuiz(resetLocalState) {
         setQuizIsFinished(false);
@@ -52,8 +57,9 @@ function App() {
                     ),
                 }}
             />
-            <Intro />
-            {questionBank.length === 0 ? (
+            {!startQuiz ? (
+                <Intro handleIntroClick={handleIntroClick} />
+            ) : questionBank.length === 0 ? (
                 <Loading />
             ) : (
                 <Quiz
