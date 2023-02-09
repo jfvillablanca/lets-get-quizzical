@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "he";
-import data from "../assets/questions.js";
 
 function shuffleArray(array) {
     const indexArray = array.map((_, index) => index);
@@ -11,49 +10,35 @@ function shuffleArray(array) {
     return shuffledIndexArray.map((index) => array[index]);
 }
 
-export default function Quiz() {
-    const triviaUrl = "https://opentdb.com/api.php?amount=50&category=9";
-
-    const [questionBank, setQuestionBank] = useState([]);
-    const [quizzes, setQuizzes] = useState([]);
+export default function Quiz({ quiz }) {
+    const [quizzes, setQuizzes] = useState(getQuestions(quiz));
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
     const [quizIsFinished, setQuizIsFinished] = useState(false);
 
-    useEffect(() => {
-        (async (triviaUrl) => {
-            async function fetchData() {
-                const resp = await fetch(triviaUrl);
-                const data = await resp.json();
-                setQuestionBank(data.results);
+    function getQuestions(quiz) {
+        const questions = quiz.map(
+            ({ question, correct_answer, incorrect_answers }) => {
+                const shuffledChoices = shuffleArray([
+                    {
+                        choice: decode(correct_answer),
+                        isCorrect: true,
+                    },
+                    ...incorrect_answers.map((answer) => ({
+                        choice: decode(answer),
+                        isCorrect: false,
+                    })),
+                ]);
+                return {
+                    id: nanoid(),
+                    question: decode(question),
+                    choices: shuffledChoices,
+                };
             }
-            await fetchData();
+        );
 
-            (async () => {
-                const questions = (await questionBank).map(
-                    ({ question, correct_answer, incorrect_answers }) => {
-                        const shuffledChoices = shuffleArray([
-                            {
-                                choice: decode(correct_answer),
-                                isCorrect: true,
-                            },
-                            ...incorrect_answers.map((answer) => ({
-                                choice: decode(answer),
-                                isCorrect: false,
-                            })),
-                        ]);
-                        return {
-                            id: nanoid(),
-                            question: decode(question),
-                            choices: shuffledChoices,
-                        };
-                    }
-                );
-
-                setQuizzes(shuffleArray(questions));
-            })();
-        })(triviaUrl);
-    }, []);
+        return shuffleArray(questions);
+    }
 
     function handleSelect(id, choice) {
         setSelectedAnswers({

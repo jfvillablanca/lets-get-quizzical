@@ -1,12 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toggle from "react-toggle";
 import "./assets/react-toggle.css";
 import { Icon } from "@iconify/react";
 import Intro from "./components/Intro.jsx";
+import Quiz from "./components/Quiz.jsx";
 import "./App.scss";
 
 function App() {
     const [theme, setTheme] = useState("dark");
+
+    const triviaUrl =
+        "https://opentdb.com/api.php?amount=50&category=9&type=multiple";
+    const [questionBank, setQuestionBank] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const resp = await fetch(triviaUrl);
+            const data = await resp.json();
+            setQuestionBank(data.results);
+        })();
+    }, []);
 
     function toggleTheme() {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -26,6 +39,11 @@ function App() {
                 }}
             />
             <Intro />
+            {questionBank.length === 0 ? (
+                <Loading />
+            ) : (
+                <Quiz quiz={questionBank.slice(0, 5)} />
+            )}
         </div>
     );
 }
