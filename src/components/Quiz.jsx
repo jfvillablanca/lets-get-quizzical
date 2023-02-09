@@ -32,23 +32,27 @@ export default function Quiz() {
     }
 
     function getQuestions() {
-        return data.map(({ question, correct_answer, incorrect_answers }) => {
-            const shuffledChoices = shuffleArray([
-                {
-                    choice: decode(correct_answer),
-                    isCorrect: true,
-                },
-                ...incorrect_answers.map((answer) => ({
-                    choice: decode(answer),
-                    isCorrect: false,
-                })),
-            ]);
-            return {
-                id: nanoid(),
-                question: decode(question),
-                choices: shuffledChoices,
-            };
-        });
+        const questions = data.map(
+            ({ question, correct_answer, incorrect_answers }) => {
+                const shuffledChoices = shuffleArray([
+                    {
+                        choice: decode(correct_answer),
+                        isCorrect: true,
+                    },
+                    ...incorrect_answers.map((answer) => ({
+                        choice: decode(answer),
+                        isCorrect: false,
+                    })),
+                ]);
+                return {
+                    id: nanoid(),
+                    question: decode(question),
+                    choices: shuffledChoices,
+                };
+            }
+        );
+
+        return shuffleArray(questions);
     }
 
     function printQuestions() {
