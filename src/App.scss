@@ -119,12 +119,17 @@ button:focus-visible {
 
         button.finished.correct {
             background-color: #94d7a2;
-            color: #293264;
+            color: #a1a9cc;
             border: none;
+        }
+
+        button.selected.finished.correct {
+            color: #293264;
         }
 
         button.selected.finished.wrong {
             background-color: #f7d9db;
+            color: #293264;
             border: none;
         }
     }
@@ -164,13 +169,17 @@ button:focus-visible {
 
         button.finished.correct {
             background-color: #3da453;
-            color: white;
+            color: #bac0d9;
             border: none;
+        }
+
+        button.selected.finished.correct {
+            color: white;
         }
 
         button.selected.finished.wrong {
             background-color: #b52630;
-            color: #bac0d9;
+            color: white;
             border: none;
         }
 
