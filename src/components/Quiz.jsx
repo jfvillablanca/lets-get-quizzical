@@ -12,21 +12,20 @@ function shuffleArray(array) {
 
 export default function Quiz({
     questionBank,
-    questionBankIndices,
     quizIsFinished,
     resetQuiz,
     checkAnswers,
+    quizLength,
 }) {
     const [quizzes, setQuizzes] = useState(
-        getQuestions(questionBank, questionBankIndices)
+        getQuestions(questionBank, quizLength)
     );
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
 
-    function getQuestions(questionBank, questionBankIndices) {
-        const [start, end] = questionBankIndices;
+    function getQuestions(questionBank, quizLength) {
         const questions = questionBank
-            .slice(start, end)
+            .slice(0, quizLength)
             .map(({ question, correct_answer, incorrect_answers }) => {
                 const shuffledChoices = shuffleArray([
                     {
@@ -84,7 +83,7 @@ export default function Quiz({
     function playAgain() {
         setSelectedAnswers({});
         setAnsweredAll(false);
-        setQuizzes(getQuestions(questionBank, questionBankIndices));
+        setQuizzes(getQuestions(questionBank));
     }
 
     return (

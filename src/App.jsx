@@ -15,10 +15,6 @@ function App() {
 
     function resetQuiz(resetLocalState) {
         setQuizIsFinished(false);
-        setQuestionBankIndex((prevIndices) => [
-            prevIndices[0] + quizLength,
-            prevIndices[1] + quizLength,
-        ]);
         resetLocalState();
     }
 
@@ -27,10 +23,6 @@ function App() {
     }
 
     const [questionBank, setQuestionBank] = useState([]);
-    const [questionBankIndices, setQuestionBankIndex] = useState([
-        0,
-        quizLength,
-    ]);
 
     useEffect(() => {
         // BUG: Two API calls instead of just one
@@ -64,10 +56,10 @@ function App() {
             ) : (
                 <Quiz
                     questionBank={questionBank}
-                    questionBankIndices={questionBankIndices}
                     quizIsFinished={quizIsFinished}
                     resetQuiz={resetQuiz}
                     checkAnswers={checkAnswers}
+                    quizLength={quizLength}
                 />
             )}
         </div>
