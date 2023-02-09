@@ -204,6 +204,11 @@ button:focus-visible {
     width: 100%;
     padding-top: 2rem;
 
+    @media (min-width: 1200px) {
+        max-width: 1200px;
+        width: 100%;
+    }
+
     section {
         width: 90%;
         display: grid;
@@ -246,6 +251,13 @@ button:focus-visible {
 
         button.selected {
             border: none;
+        }
+    }
+
+    .quiz-question,
+    .quiz-choices button {
+        @media (min-width: 1200px) {
+            font-size: 2.2rem;
         }
     }
 }
