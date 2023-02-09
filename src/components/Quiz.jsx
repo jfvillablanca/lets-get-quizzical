@@ -14,6 +14,7 @@ function shuffleArray(array) {
 export default function Quiz() {
     const triviaUrl = "https://opentdb.com/api.php?amount=50&category=9";
 
+    const [questionBank, setQuestionBank] = useState([]);
     const [quizzes, setQuizzes] = useState([]);
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
@@ -35,9 +36,12 @@ export default function Quiz() {
 
     useEffect(() => {
         ((triviaUrl) => {
-            fetch(triviaUrl)
-                .then((resp) => resp.json())
-                .then((data) => console.log(data.results));
+            async function fetchData() {
+                const resp = await fetch(triviaUrl);
+                const data = await resp.json();
+                setQuestionBank(data.results);
+            }
+            fetchData();
 
             (() => {
                 const questions = data.map(
