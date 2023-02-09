@@ -12,17 +12,22 @@ function shuffleArray(array) {
 
 export default function Quiz({
     questionBank,
+    questionBankIndices,
     quizIsFinished,
     resetQuiz,
     checkAnswers,
 }) {
-    const [quizzes, setQuizzes] = useState(getQuestions(questionBank));
+    const [quizzes, setQuizzes] = useState(
+        getQuestions(questionBank, questionBankIndices)
+    );
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
 
-    function getQuestions(questionBank) {
-        const questions = questionBank.map(
-            ({ question, correct_answer, incorrect_answers }) => {
+    function getQuestions(questionBank, questionBankIndices) {
+        const [start, end] = questionBankIndices;
+        const questions = questionBank
+            .slice(start, end)
+            .map(({ question, correct_answer, incorrect_answers }) => {
                 const shuffledChoices = shuffleArray([
                     {
                         choice: decode(correct_answer),
@@ -38,10 +43,9 @@ export default function Quiz({
                     question: decode(question),
                     choices: shuffledChoices,
                 };
-            }
-        );
+            });
 
-        return shuffleArray(questions);
+        return questions;
     }
 
     function handleSelect(id, choice) {
@@ -80,6 +84,7 @@ export default function Quiz({
     function playAgain() {
         setSelectedAnswers({});
         setAnsweredAll(false);
+        setQuizzes(getQuestions(questionBank, questionBankIndices));
     }
 
     return (

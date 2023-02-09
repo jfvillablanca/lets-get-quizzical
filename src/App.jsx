@@ -7,11 +7,17 @@ import Quiz from "./components/Quiz.jsx";
 import "./App.scss";
 
 function App() {
+    const quizLength = 5;
+
     const [theme, setTheme] = useState("dark");
     const [quizIsFinished, setQuizIsFinished] = useState(false);
 
     function resetQuiz(resetLocalState) {
         setQuizIsFinished(false);
+        setQuestionBankIndex((prevIndices) => [
+            prevIndices[0] + quizLength,
+            prevIndices[1] + quizLength,
+        ]);
         resetLocalState();
     }
 
@@ -22,8 +28,13 @@ function App() {
     const triviaUrl =
         "https://opentdb.com/api.php?amount=50&category=9&type=multiple";
     const [questionBank, setQuestionBank] = useState([]);
+    const [questionBankIndices, setQuestionBankIndex] = useState([
+        0,
+        quizLength,
+    ]);
 
     useEffect(() => {
+        // BUG: Two API calls instead of just one
         (async () => {
             const resp = await fetch(triviaUrl);
             const data = await resp.json();
@@ -53,7 +64,8 @@ function App() {
                 <Loading />
             ) : (
                 <Quiz
-                    questionBank={questionBank.slice(0, 5)}
+                    questionBank={questionBank}
+                    questionBankIndices={questionBankIndices}
                     quizIsFinished={quizIsFinished}
                     resetQuiz={resetQuiz}
                     checkAnswers={checkAnswers}
