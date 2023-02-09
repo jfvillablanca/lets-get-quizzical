@@ -39,7 +39,7 @@ export default function Quiz() {
                 .then((resp) => resp.json())
                 .then((data) => console.log(data.results));
 
-            (function getQuestions() {
+            (() => {
                 const questions = data.map(
                     ({ question, correct_answer, incorrect_answers }) => {
                         const shuffledChoices = shuffleArray([
