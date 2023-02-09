@@ -4,7 +4,11 @@ import { decode } from "he";
 import data from "../assets/questions.js";
 
 function shuffleArray(array) {
-    return array.slice().sort(() => Math.random() - 0.5);
+    const indexArray = array.map((_, index) => index);
+    const shuffledIndexArray = indexArray
+        .slice()
+        .sort(() => Math.random() - 0.5);
+    return shuffledIndexArray.map((index) => array[index]);
 }
 
 export default function Quiz() {
