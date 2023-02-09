@@ -243,6 +243,18 @@ button:focus-visible {
     }
 }
 
+.submit-container {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    @include center-grid-items;
+}
+
+.submit-container.finished {
+    grid-template-columns: 1fr;
+}
+
 .check-answers {
     font-weight: bold;
     width: max-content;
