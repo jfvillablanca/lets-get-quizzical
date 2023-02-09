@@ -84,6 +84,7 @@ export default function Quiz() {
                     quizIsFinished ? playAgain() : checkAnswers()
                 }
                 quizIsFinished={quizIsFinished}
+                answers={selectedAnswers}
             />
         </div>
     );
@@ -135,8 +136,18 @@ function Question({
     );
 }
 
-function SubmitButton({ isAnsweredCompletely, handleClick, quizIsFinished }) {
+function SubmitButton({
+    isAnsweredCompletely,
+    handleClick,
+    quizIsFinished,
+    answers,
+}) {
     const [buttonClicked, setButtonClicked] = useState(false);
+
+    const correctCount = Object.values(answers).filter(
+        (choice) => choice.isCorrect
+    ).length;
+    const totalCount = Object.values(answers).length;
 
     return (
         <div
@@ -145,7 +156,7 @@ function SubmitButton({ isAnsweredCompletely, handleClick, quizIsFinished }) {
             }
         >
             {quizIsFinished && (
-                <p className='quiz-results'>3/5 correct answers</p>
+                <p className='quiz-results'>{`${correctCount}/${totalCount} correct answers`}</p>
             )}
             <button
                 className='check-answers'
