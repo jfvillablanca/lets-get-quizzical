@@ -25,13 +25,15 @@ function App() {
     const [questionBank, setQuestionBank] = useState([]);
 
     useEffect(() => {
-        // BUG: Two API calls instead of just one
+        // BUG: Initial Render: Two API calls instead of just one
         (async () => {
             const resp = await fetch(triviaUrl);
             const data = await resp.json();
             setQuestionBank(data.results);
         })();
-    }, []);
+        // NOTE:: Also two API calls, most likely unrelated to the bug.
+        // - `quizIsFinished` flips value twice, on checkAnswers and on resetQuiz
+    }, [quizIsFinished]);
 
     function toggleTheme() {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
