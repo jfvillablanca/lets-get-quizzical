@@ -10,14 +10,14 @@ function shuffleArray(array) {
     return shuffledIndexArray.map((index) => array[index]);
 }
 
-export default function Quiz({ quiz }) {
-    const [quizzes, setQuizzes] = useState(getQuestions(quiz));
+export default function Quiz({ questionBank }) {
+    const [quizzes, setQuizzes] = useState(getQuestions(questionBank));
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
     const [quizIsFinished, setQuizIsFinished] = useState(false);
 
-    function getQuestions(quiz) {
-        const questions = quiz.map(
+    function getQuestions(questionBank) {
+        const questions = questionBank.map(
             ({ question, correct_answer, incorrect_answers }) => {
                 const shuffledChoices = shuffleArray([
                     {

@@ -42,7 +42,7 @@ function App() {
             {questionBank.length === 0 ? (
                 <Loading />
             ) : (
-                <Quiz quiz={questionBank.slice(0, 5)} />
+                <Quiz questionBank={questionBank.slice(0, 5)} />
             )}
         </div>
     );
