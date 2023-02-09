@@ -35,16 +35,16 @@ export default function Quiz() {
     }
 
     useEffect(() => {
-        ((triviaUrl) => {
+        (async (triviaUrl) => {
             async function fetchData() {
                 const resp = await fetch(triviaUrl);
                 const data = await resp.json();
                 setQuestionBank(data.results);
             }
-            fetchData();
+            await fetchData();
 
-            (() => {
-                const questions = data.map(
+            (async () => {
+                const questions = (await questionBank).map(
                     ({ question, correct_answer, incorrect_answers }) => {
                         const shuffledChoices = shuffleArray([
                             {
