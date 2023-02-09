@@ -8,6 +8,7 @@ import "./App.scss";
 
 function App() {
     const quizLength = 5;
+    const triviaUrl = `https://opentdb.com/api.php?amount=${quizLength}&category=9&type=multiple`;
 
     const [theme, setTheme] = useState("dark");
     const [quizIsFinished, setQuizIsFinished] = useState(false);
@@ -25,8 +26,6 @@ function App() {
         setQuizIsFinished(true);
     }
 
-    const triviaUrl =
-        "https://opentdb.com/api.php?amount=50&category=9&type=multiple";
     const [questionBank, setQuestionBank] = useState([]);
     const [questionBankIndices, setQuestionBankIndex] = useState([
         0,
