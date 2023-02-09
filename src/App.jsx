@@ -8,6 +8,16 @@ import "./App.scss";
 
 function App() {
     const [theme, setTheme] = useState("dark");
+    const [quizIsFinished, setQuizIsFinished] = useState(false);
+
+    function resetQuiz(resetLocalState) {
+        setQuizIsFinished(false);
+        resetLocalState();
+    }
+
+    function checkAnswers() {
+        setQuizIsFinished(true);
+    }
 
     const triviaUrl =
         "https://opentdb.com/api.php?amount=50&category=9&type=multiple";
@@ -42,7 +52,12 @@ function App() {
             {questionBank.length === 0 ? (
                 <Loading />
             ) : (
-                <Quiz questionBank={questionBank.slice(0, 5)} />
+                <Quiz
+                    questionBank={questionBank.slice(0, 5)}
+                    quizIsFinished={quizIsFinished}
+                    resetQuiz={resetQuiz}
+                    checkAnswers={checkAnswers}
+                />
             )}
         </div>
     );

@@ -10,11 +10,15 @@ function shuffleArray(array) {
     return shuffledIndexArray.map((index) => array[index]);
 }
 
-export default function Quiz({ questionBank }) {
+export default function Quiz({
+    questionBank,
+    quizIsFinished,
+    resetQuiz,
+    checkAnswers,
+}) {
     const [quizzes, setQuizzes] = useState(getQuestions(questionBank));
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
-    const [quizIsFinished, setQuizIsFinished] = useState(false);
 
     function getQuestions(questionBank) {
         const questions = questionBank.map(
@@ -73,14 +77,9 @@ export default function Quiz({ questionBank }) {
         });
     }
 
-    function checkAnswers() {
-        setQuizIsFinished(true);
-    }
-
     function playAgain() {
         setSelectedAnswers({});
         setAnsweredAll(false);
-        setQuizIsFinished(false);
     }
 
     return (
@@ -89,7 +88,7 @@ export default function Quiz({ questionBank }) {
             <SubmitButton
                 isAnsweredCompletely={answeredAll}
                 handleClick={() =>
-                    quizIsFinished ? playAgain() : checkAnswers()
+                    quizIsFinished ? resetQuiz(playAgain) : checkAnswers()
                 }
                 quizIsFinished={quizIsFinished}
                 answers={selectedAnswers}
