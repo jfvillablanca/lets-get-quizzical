@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "he";
 import data from "../assets/questions.js";
@@ -12,7 +12,9 @@ function shuffleArray(array) {
 }
 
 export default function Quiz() {
-    const [quizzes, setQuizzes] = useState(getQuestions());
+    const triviaUrl = "https://opentdb.com/api.php?amount=50&category=9";
+
+    const [quizzes, setQuizzes] = useState([]);
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [answeredAll, setAnsweredAll] = useState(false);
     const [quizIsFinished, setQuizIsFinished] = useState(false);
@@ -31,29 +33,37 @@ export default function Quiz() {
         );
     }
 
-    function getQuestions() {
-        const questions = data.map(
-            ({ question, correct_answer, incorrect_answers }) => {
-                const shuffledChoices = shuffleArray([
-                    {
-                        choice: decode(correct_answer),
-                        isCorrect: true,
-                    },
-                    ...incorrect_answers.map((answer) => ({
-                        choice: decode(answer),
-                        isCorrect: false,
-                    })),
-                ]);
-                return {
-                    id: nanoid(),
-                    question: decode(question),
-                    choices: shuffledChoices,
-                };
-            }
-        );
+    useEffect(() => {
+        ((triviaUrl) => {
+            fetch(triviaUrl)
+                .then((resp) => resp.json())
+                .then((data) => console.log(data.results));
 
-        return shuffleArray(questions);
-    }
+            (function getQuestions() {
+                const questions = data.map(
+                    ({ question, correct_answer, incorrect_answers }) => {
+                        const shuffledChoices = shuffleArray([
+                            {
+                                choice: decode(correct_answer),
+                                isCorrect: true,
+                            },
+                            ...incorrect_answers.map((answer) => ({
+                                choice: decode(answer),
+                                isCorrect: false,
+                            })),
+                        ]);
+                        return {
+                            id: nanoid(),
+                            question: decode(question),
+                            choices: shuffledChoices,
+                        };
+                    }
+                );
+
+                setQuizzes(shuffleArray(questions));
+            })();
+        })(triviaUrl);
+    }, []);
 
     function printQuestions() {
         return quizzes.map((quiz, index) => {
