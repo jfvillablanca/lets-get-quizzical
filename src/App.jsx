@@ -46,7 +46,7 @@ function App() {
 
     return (
         <div className={`App ${theme}`}>
-            <div className={`blob ${theme}`} />
+            <Blob />
             <Toggle
                 onClick={toggleTheme}
                 icons={{
@@ -77,6 +77,34 @@ function App() {
 
 function Loading() {
     return <div className='loading-screen'>Loading...</div>;
+}
+
+function Blob() {
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        function handleScroll() {
+            setScrollY(self.pageYOffset);
+        }
+
+        self.addEventListener("scroll", handleScroll);
+
+        return () => {
+            self.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    const maxTranslateY = self.innerHeight * 0.7;
+    const translate = `translateY(${Math.min(scrollY * 0.5, maxTranslateY)}px)`;
+
+    return (
+        <div
+            className='blob'
+            style={{
+                transform: translate,
+            }}
+        />
+    );
 }
 
 export default App;
