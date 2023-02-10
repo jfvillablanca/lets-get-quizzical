@@ -63,6 +63,23 @@ button:focus-visible {
     gap: 1rem;
 }
 
+.blob {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.intro,
+.loading-screen,
+.quiz {
+    z-index: 1;
+}
+
+
 .react-toggle,
 .react-toggle--checked {
     justify-self: end;
@@ -90,6 +107,9 @@ button:focus-visible {
 }
 
 .App.light {
+    .blob {
+        background-image: url(./assets/blob-light.svg);
+    }
     color: #293264;
     background-color: #f9f9f9;
     button {
@@ -136,6 +156,10 @@ button:focus-visible {
 }
 
 .App.dark {
+    .blob {
+        background-image: url(./assets/blob-dark.svg);
+        opacity: 50%;
+    }
     color: white;
     background-color: #242424;
     button {

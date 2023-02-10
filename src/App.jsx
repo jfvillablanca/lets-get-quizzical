@@ -46,6 +46,7 @@ function App() {
 
     return (
         <div className={`App ${theme}`}>
+            <div className={`blob ${theme}`} />
             <Toggle
                 onClick={toggleTheme}
                 icons={{
