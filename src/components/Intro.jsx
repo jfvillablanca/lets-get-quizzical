@@ -10,13 +10,13 @@ export default function Intro({
                 <label
                     className={
                         "category-questions" +
-                        (selectedCategory === "5 questions" ? " active" : "")
+                        (selectedCategory.quizLength === 5 ? " active" : "")
                     }
                 >
                     <input
                         type='radio'
                         name='question-qty'
-                        value='5 questions'
+                        value='5'
                         onChange={handleCategoryChange}
                     />
                     5 questions
@@ -24,13 +24,13 @@ export default function Intro({
                 <label
                     className={
                         "category-questions" +
-                        (selectedCategory === "10 questions" ? " active" : "")
+                        (selectedCategory.quizLength === 10 ? " active" : "")
                     }
                 >
                     <input
                         type='radio'
                         name='question-qty'
-                        value='10 questions'
+                        value='10'
                         onChange={handleCategoryChange}
                     />
                     10 questions
@@ -38,13 +38,13 @@ export default function Intro({
                 <label
                     className={
                         "category-questions" +
-                        (selectedCategory === "15 questions" ? " active" : "")
+                        (selectedCategory.quizLength === 15 ? " active" : "")
                     }
                 >
                     <input
                         type='radio'
                         name='question-qty'
-                        value='15 questions'
+                        value='15'
                         onChange={handleCategoryChange}
                     />
                     15 questions

@@ -7,16 +7,16 @@ import Quiz from "./components/Quiz.jsx";
 import "./App.scss";
 
 function App() {
-    const quizLength = 5;
-    const triviaUrl = `https://opentdb.com/api.php?amount=${quizLength}&category=9&type=multiple`;
-
     const [theme, setTheme] = useState("dark");
     const [quizIsFinished, setQuizIsFinished] = useState(false);
     const [startQuiz, setStartQuiz] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState({});
 
     function handleCategoryChange(e) {
-        setSelectedCategory(e.target.value)
+        setSelectedCategory((prevSelectedCategory) => ({
+            ...prevSelectedCategory,
+            quizLength: +e.target.value,
+        }));
     }
 
     function handleIntroClick() {
@@ -35,15 +35,18 @@ function App() {
     const [questionBank, setQuestionBank] = useState([]);
 
     useEffect(() => {
+        const triviaUrl = `https://opentdb.com/api.php?amount=${selectedCategory.quizLength}&category=9&type=multiple`;
+
         // BUG: Initial Render: Two API calls instead of just one
         (async () => {
             const resp = await fetch(triviaUrl);
             const data = await resp.json();
             setQuestionBank(data.results);
+            console.log(questionBank.length);
         })();
         // NOTE:: Also two API calls, most likely unrelated to the bug.
         // - `quizIsFinished` flips value twice, on checkAnswers and on resetQuiz
-    }, [quizIsFinished]);
+    }, [quizIsFinished, startQuiz]);
 
     function toggleTheme() {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -64,7 +67,11 @@ function App() {
                 }}
             />
             {!startQuiz ? (
-                <Intro handleIntroClick={handleIntroClick} handleCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
+                <Intro
+                    handleIntroClick={handleIntroClick}
+                    handleCategoryChange={handleCategoryChange}
+                    selectedCategory={selectedCategory}
+                />
             ) : questionBank.length === 0 ? (
                 <Loading />
             ) : (
@@ -73,7 +80,7 @@ function App() {
                     quizIsFinished={quizIsFinished}
                     resetQuiz={resetQuiz}
                     checkAnswers={checkAnswers}
-                    quizLength={quizLength}
+                    quizLength={selectedCategory.quizLength}
                 />
             )}
         </div>
