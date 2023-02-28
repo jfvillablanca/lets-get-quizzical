@@ -13,6 +13,11 @@ function App() {
     const [theme, setTheme] = useState("dark");
     const [quizIsFinished, setQuizIsFinished] = useState(false);
     const [startQuiz, setStartQuiz] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState("");
+
+    function handleCategoryChange(e) {
+        setSelectedCategory(e.target.value)
+    }
 
     function handleIntroClick() {
         setStartQuiz(true);
@@ -59,7 +64,7 @@ function App() {
                 }}
             />
             {!startQuiz ? (
-                <Intro handleIntroClick={handleIntroClick} />
+                <Intro handleIntroClick={handleIntroClick} handleCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
             ) : questionBank.length === 0 ? (
                 <Loading />
             ) : (
