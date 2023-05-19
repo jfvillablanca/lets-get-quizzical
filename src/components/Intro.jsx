@@ -5,7 +5,7 @@ export default function Intro({
 }) {
     return (
         <div className='intro'>
-            <h1>💭😩 Quiz Me Daddy 🥴💦</h1>
+            <h1>🤓 Let's get quizzical! 💭</h1>
             <div className='category'>
                 <label
                     className={
